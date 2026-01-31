@@ -8,22 +8,40 @@ import SubmoltHeatmap from '@/components/SubmoltHeatmap';
 import TopAgents from '@/components/TopAgents';
 
 async function getInitialData() {
-  const [postsData, submoltsData] = await Promise.all([
-    fetchPosts('new', 100),
-    fetchSubmolts(200),
-  ]);
+  try {
+    const [postsData, submoltsData] = await Promise.all([
+      fetchPosts('new', 100),
+      fetchSubmolts(200),
+    ]);
 
-  return {
-    posts: postsData.posts,
-    submolts: submoltsData.submolts,
-    stats: {
-      totalAgents: 157000,
-      totalPosts: submoltsData.total_posts,
-      totalComments: submoltsData.total_comments,
-      totalSubmolts: submoltsData.count,
-      postsPerMinute: calculateActivityRate(postsData.posts),
-    },
-  };
+    const posts = postsData?.posts || [];
+    const submolts = submoltsData?.submolts || [];
+
+    return {
+      posts,
+      submolts,
+      stats: {
+        totalAgents: 157000,
+        totalPosts: submoltsData?.total_posts || 0,
+        totalComments: submoltsData?.total_comments || 0,
+        totalSubmolts: submoltsData?.count || 0,
+        postsPerMinute: calculateActivityRate(posts),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching initial data:', error);
+    return {
+      posts: [],
+      submolts: [],
+      stats: {
+        totalAgents: 157000,
+        totalPosts: 0,
+        totalComments: 0,
+        totalSubmolts: 0,
+        postsPerMinute: 0,
+      },
+    };
+  }
 }
 
 function LoadingSkeleton() {

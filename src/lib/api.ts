@@ -92,10 +92,11 @@ export async function fetchSubmoltPosts(
 
 // Calculate activity metrics
 export function calculateActivityRate(posts: Post[]): number {
-  if (posts.length < 2) return 0;
+  if (!posts || posts.length < 2) return 0;
   const newest = new Date(posts[0].created_at).getTime();
   const oldest = new Date(posts[posts.length - 1].created_at).getTime();
   const timeSpan = (newest - oldest) / 1000 / 60; // in minutes
+  if (timeSpan <= 0) return 0;
   return posts.length / timeSpan; // posts per minute
 }
 
