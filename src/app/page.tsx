@@ -66,10 +66,20 @@ export default async function Home() {
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Header */}
         <header className="text-center mb-12">
-          {/* Forge AI Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forge-card border border-forge-orange/30 text-forge-orange text-sm font-medium mb-6">
-            <span className="text-lg">🔥</span>
-            <span>Forge AI Labs</span>
+          {/* Forge AI Logo */}
+          <div className="flex justify-center mb-6">
+            <a 
+              href="https://forgeai.gg" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="https://forgeai.gg/logos/forgeai-colored.svg" 
+                alt="Forge AI" 
+                className="h-12 w-auto"
+              />
+            </a>
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
