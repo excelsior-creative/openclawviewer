@@ -21,7 +21,7 @@ async function getInitialData() {
       posts,
       submolts,
       stats: {
-        totalAgents: 157000,
+        totalAgents: 1500000,
         totalPosts: submoltsData?.total_posts || 0,
         totalComments: submoltsData?.total_comments || 0,
         totalSubmolts: submoltsData?.count || 0,
@@ -34,7 +34,7 @@ async function getInitialData() {
       posts: [],
       submolts: [],
       stats: {
-        totalAgents: 157000,
+        totalAgents: 1500000,
         totalPosts: 0,
         totalComments: 0,
         totalSubmolts: 0,
@@ -46,8 +46,8 @@ async function getInitialData() {
 
 function LoadingSkeleton() {
   return (
-    <div className="h-64 bg-gray-800/50 rounded-xl animate-pulse flex items-center justify-center">
-      <div className="text-gray-500">Loading visualization...</div>
+    <div className="h-64 bg-forge-card border border-forge-border rounded-xl animate-pulse flex items-center justify-center">
+      <div className="text-forge-muted">Loading visualization...</div>
     </div>
   );
 }
@@ -56,27 +56,39 @@ export default async function Home() {
   const { posts, submolts, stats } = await getInitialData();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-950 via-purple-950/20 to-gray-950">
+    <main className="min-h-screen bg-forge-bg bg-grid-pattern">
       {/* Animated background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-radial from-purple-600/10 to-transparent animate-pulse" />
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-radial from-pink-600/10 to-transparent animate-pulse delay-1000" />
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-radial from-forge-orange/10 to-transparent animate-pulse" />
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-radial from-forge-yellow/10 to-transparent animate-pulse delay-1000" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Header */}
         <header className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-4">
-            OpenClawViewer
+          {/* Forge AI Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forge-card border border-forge-orange/30 text-forge-orange text-sm font-medium mb-6">
+            <span className="text-lg">🔥</span>
+            <span>Forge AI Labs</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <span style={{
+              background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 30%, #f97316 70%, #ea580c 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
+              OpenClaw Viewer
+            </span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-forge-muted text-lg max-w-2xl mx-auto">
             Real-time visualization of the Agent Internet. Watch AI agents
             share, discuss, and upvote on{' '}
             <a
               href="https://moltbook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-400 hover:text-purple-300 underline"
+              className="text-forge-orange hover:text-forge-yellow underline transition-colors"
             >
               Moltbook
             </a>
@@ -90,11 +102,11 @@ export default async function Home() {
 
         {/* Activity Pulse */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-forge-text mb-6 flex items-center gap-3">
             <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
             Activity Pulse
           </h2>
-          <div className="bg-black/30 rounded-xl p-6 backdrop-blur-sm border border-gray-800">
+          <div className="bg-forge-card rounded-xl p-6 backdrop-blur-sm border border-forge-border">
             <Suspense fallback={<LoadingSkeleton />}>
               <ActivityPulse posts={posts} />
             </Suspense>
@@ -103,10 +115,10 @@ export default async function Home() {
 
         {/* 3D Network Graph */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-            <span className="w-3 h-3 bg-purple-500 rounded-full animate-pulse" />
+          <h2 className="text-2xl font-bold text-forge-text mb-6 flex items-center gap-3">
+            <span className="w-3 h-3 bg-forge-orange rounded-full animate-pulse" />
             Agent Network
-            <span className="text-sm font-normal text-gray-500 ml-2">
+            <span className="text-sm font-normal text-forge-muted ml-2">
               (drag to rotate)
             </span>
           </h2>
@@ -119,8 +131,8 @@ export default async function Home() {
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {/* Live Feed */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <span className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse" />
+            <h2 className="text-2xl font-bold text-forge-text mb-6 flex items-center gap-3">
+              <span className="w-3 h-3 bg-forge-yellow rounded-full animate-pulse" />
               Live Feed
             </h2>
             <LiveFeed />
@@ -132,29 +144,6 @@ export default async function Home() {
             <SubmoltHeatmap submolts={submolts} />
           </div>
         </div>
-
-        {/* Footer */}
-        <footer className="text-center text-gray-500 text-sm py-8 border-t border-gray-800">
-          <p>
-            Built with ❤️ by{' '}
-            <a
-              href="https://excelsiorcreative.com"
-              className="text-purple-400 hover:text-purple-300"
-            >
-              Excelsior Creative
-            </a>
-          </p>
-          <p className="mt-2">
-            Data from{' '}
-            <a
-              href="https://moltbook.com"
-              className="text-purple-400 hover:text-purple-300"
-            >
-              Moltbook API
-            </a>{' '}
-            • Visualizations update in real-time
-          </p>
-        </footer>
       </div>
     </main>
   );

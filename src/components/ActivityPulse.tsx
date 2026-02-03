@@ -99,7 +99,7 @@ export default function ActivityPulse({ posts }: ActivityPulseProps) {
     feMerge.append('feMergeNode').attr('in', 'coloredBlur');
     feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
-    // Gradient
+    // Gradient - Forge AI orange
     const gradient = defs
       .append('linearGradient')
       .attr('id', 'areaGradient')
@@ -111,13 +111,13 @@ export default function ActivityPulse({ posts }: ActivityPulseProps) {
     gradient
       .append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', '#8b5cf6')
+      .attr('stop-color', '#f97316')
       .attr('stop-opacity', 0.8);
 
     gradient
       .append('stop')
       .attr('offset', '100%')
-      .attr('stop-color', '#8b5cf6')
+      .attr('stop-color', '#f97316')
       .attr('stop-opacity', 0);
 
     // Area
@@ -133,7 +133,7 @@ export default function ActivityPulse({ posts }: ActivityPulseProps) {
       .attr('fill', 'url(#areaGradient)')
       .attr('d', area);
 
-    // Line
+    // Line - Forge AI yellow
     const line = d3
       .line<(typeof bucketData)[0]>()
       .x((d) => xScale(d.time))
@@ -143,12 +143,12 @@ export default function ActivityPulse({ posts }: ActivityPulseProps) {
     g.append('path')
       .datum(bucketData)
       .attr('fill', 'none')
-      .attr('stroke', '#a78bfa')
+      .attr('stroke', '#f59e0b')
       .attr('stroke-width', 2)
       .attr('filter', 'url(#glow)')
       .attr('d', line);
 
-    // Dots
+    // Dots - Forge AI amber
     g.selectAll('.dot')
       .data(bucketData)
       .enter()
@@ -157,14 +157,14 @@ export default function ActivityPulse({ posts }: ActivityPulseProps) {
       .attr('cx', (d) => xScale(d.time))
       .attr('cy', (d) => yScale(d.count))
       .attr('r', 4)
-      .attr('fill', '#c4b5fd')
+      .attr('fill', '#fbbf24')
       .attr('filter', 'url(#glow)')
       .style('cursor', 'pointer')
       .on('mouseover', function (event, d) {
-        d3.select(this).attr('r', 8).attr('fill', '#f472b6');
+        d3.select(this).attr('r', 8).attr('fill', '#f97316');
       })
       .on('mouseout', function () {
-        d3.select(this).attr('r', 4).attr('fill', '#c4b5fd');
+        d3.select(this).attr('r', 4).attr('fill', '#fbbf24');
       });
 
     // Axes
@@ -178,17 +178,17 @@ export default function ActivityPulse({ posts }: ActivityPulseProps) {
           .tickFormat((d) => d3.timeFormat('%H:%M')(d as Date))
       )
       .selectAll('text')
-      .attr('fill', '#9ca3af');
+      .attr('fill', '#a1a1aa');
 
     g.append('g')
       .attr('class', 'axis')
       .call(d3.axisLeft(yScale).ticks(5))
       .selectAll('text')
-      .attr('fill', '#9ca3af');
+      .attr('fill', '#a1a1aa');
 
-    // Style axes
-    svg.selectAll('.axis path').attr('stroke', '#4b5563');
-    svg.selectAll('.axis line').attr('stroke', '#4b5563');
+    // Style axes - Forge border color
+    svg.selectAll('.axis path').attr('stroke', '#2a2a3a');
+    svg.selectAll('.axis line').attr('stroke', '#2a2a3a');
   }, [posts, dimensions]);
 
   return (

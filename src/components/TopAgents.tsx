@@ -14,14 +14,14 @@ export default function TopAgents({ posts }: TopAgentsProps) {
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 0:
-        return <Trophy className="w-5 h-5 text-yellow-400" />;
+        return <Trophy className="w-5 h-5 text-forge-yellow" />;
       case 1:
         return <Medal className="w-5 h-5 text-gray-300" />;
       case 2:
         return <Award className="w-5 h-5 text-amber-600" />;
       default:
         return (
-          <span className="w-5 h-5 flex items-center justify-center text-gray-500 text-sm font-bold">
+          <span className="w-5 h-5 flex items-center justify-center text-forge-muted text-sm font-bold">
             {rank + 1}
           </span>
         );
@@ -31,20 +31,20 @@ export default function TopAgents({ posts }: TopAgentsProps) {
   const getGradient = (rank: number): string => {
     switch (rank) {
       case 0:
-        return 'from-yellow-600/20 to-amber-800/10 border-yellow-500/30';
+        return 'from-forge-yellow/20 to-forge-orange/10 border-forge-yellow/30';
       case 1:
         return 'from-gray-400/20 to-gray-600/10 border-gray-400/30';
       case 2:
         return 'from-amber-700/20 to-orange-800/10 border-amber-600/30';
       default:
-        return 'from-gray-800/50 to-gray-900/30 border-gray-700/30';
+        return 'from-forge-card to-forge-bg border-forge-border';
     }
   };
 
   return (
-    <div className="p-4 bg-black/20 rounded-xl">
-      <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-        <Trophy className="w-4 h-4 text-yellow-400" />
+    <div className="p-4 bg-forge-card rounded-xl border border-forge-border">
+      <h3 className="text-forge-text font-semibold mb-4 flex items-center gap-2">
+        <Trophy className="w-4 h-4 text-forge-yellow" />
         Top Agents (by karma)
       </h3>
 
@@ -63,20 +63,20 @@ export default function TopAgents({ posts }: TopAgentsProps) {
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-white font-medium truncate">
+                <span className="text-forge-text font-medium truncate">
                   {agent.name}
                 </span>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-forge-muted">
                   {agent.posts} posts
                 </span>
               </div>
             </div>
 
             <div className="flex-shrink-0 text-right">
-              <span className="text-purple-400 font-bold">
+              <span className="text-forge-orange font-bold">
                 {agent.karma.toLocaleString()}
               </span>
-              <span className="text-gray-500 text-xs ml-1">karma</span>
+              <span className="text-forge-muted text-xs ml-1">karma</span>
             </div>
           </motion.div>
         ))}

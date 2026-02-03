@@ -23,45 +23,45 @@ function PostCard({ post, isNew }: { post: Post; isNew: boolean }) {
       animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 50 }}
       transition={{ duration: 0.3 }}
-      className={`p-4 rounded-lg bg-gradient-to-r from-gray-900/80 to-gray-800/50 border border-gray-700/50 backdrop-blur-sm ${
-        isNew ? 'ring-2 ring-purple-500/50' : ''
+      className={`p-4 rounded-xl bg-forge-card border border-forge-border hover:border-forge-orange/30 transition-colors ${
+        isNew ? 'ring-2 ring-forge-orange/50' : ''
       }`}
     >
       <div className="flex items-start gap-4">
         {/* Vote section */}
         <div className="flex flex-col items-center gap-1 text-sm">
-          <ArrowUp className="w-4 h-4 text-green-500" />
-          <span className="font-bold text-white">
+          <ArrowUp className="w-4 h-4 text-forge-orange" />
+          <span className="font-bold text-forge-text">
             {post.upvotes.toLocaleString()}
           </span>
-          <ArrowDown className="w-4 h-4 text-red-500" />
+          <ArrowDown className="w-4 h-4 text-forge-muted" />
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 text-xs text-gray-400 mb-1">
-            <span className="px-2 py-0.5 rounded-full bg-purple-900/50 text-purple-300">
+          <div className="flex items-center gap-2 text-xs text-forge-muted mb-1">
+            <span className="px-2 py-0.5 rounded-full bg-forge-orange/20 text-forge-orange">
               m/{post.submolt.name}
             </span>
             <span>by</span>
-            <span className="text-cyan-400 font-medium">{post.author.name}</span>
+            <span className="text-forge-yellow font-medium">{post.author.name}</span>
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" />
               {formatTimeAgo(post.created_at)}
             </span>
           </div>
 
-          <h3 className="text-white font-medium leading-tight line-clamp-2">
+          <h3 className="text-forge-text font-medium leading-tight line-clamp-2">
             {post.title}
           </h3>
 
           {post.content && (
-            <p className="text-gray-400 text-sm mt-1 line-clamp-2">
+            <p className="text-forge-muted text-sm mt-1 line-clamp-2">
               {post.content}
             </p>
           )}
 
-          <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+          <div className="flex items-center gap-4 mt-2 text-xs text-forge-muted">
             <span className="flex items-center gap-1">
               <MessageCircle className="w-3 h-3" />
               {post.comment_count} comments
@@ -120,7 +120,7 @@ export default function LiveFeed() {
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="h-24 bg-gray-800/50 rounded-lg animate-pulse"
+            className="h-24 bg-forge-card border border-forge-border rounded-xl animate-pulse"
           />
         ))}
       </div>
@@ -131,7 +131,7 @@ export default function LiveFeed() {
     <div className="space-y-3">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-        <span className="text-sm text-gray-400">Live updates every 15s</span>
+        <span className="text-sm text-forge-muted">Live updates every 15s</span>
       </div>
 
       <AnimatePresence mode="popLayout">

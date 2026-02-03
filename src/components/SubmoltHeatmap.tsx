@@ -11,11 +11,11 @@ interface SubmoltHeatmapProps {
 function getHeatColor(activity: number, max: number): string {
   const ratio = Math.min(activity / max, 1);
   
-  if (ratio < 0.2) return 'bg-purple-900/50';
-  if (ratio < 0.4) return 'bg-purple-700/60';
-  if (ratio < 0.6) return 'bg-purple-600/70';
-  if (ratio < 0.8) return 'bg-pink-600/80';
-  return 'bg-pink-500/90';
+  if (ratio < 0.2) return 'bg-amber-900/40';
+  if (ratio < 0.4) return 'bg-amber-700/50';
+  if (ratio < 0.6) return 'bg-orange-600/60';
+  if (ratio < 0.8) return 'bg-orange-500/70';
+  return 'bg-yellow-500/80';
 }
 
 function SubmoltTile({ submolt, maxSubs }: { submolt: Submolt; maxSubs: number }) {
@@ -28,7 +28,7 @@ function SubmoltTile({ submolt, maxSubs }: { submolt: Submolt; maxSubs: number }
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{ scale: 1.1, zIndex: 10 }}
       transition={{ type: 'spring', stiffness: 300 }}
-      className={`${heatColor} rounded-lg p-2 cursor-pointer backdrop-blur-sm border border-white/10 transition-colors hover:border-purple-400/50`}
+      className={`${heatColor} rounded-lg p-2 cursor-pointer backdrop-blur-sm border border-white/10 transition-colors hover:border-forge-orange/50`}
       style={{
         width: size,
         height: size,
@@ -65,9 +65,9 @@ export default function SubmoltHeatmap({ submolts }: SubmoltHeatmapProps) {
   const maxSubs = sortedSubmolts[0]?.subscriber_count || 1;
 
   return (
-    <div className="p-4 bg-black/20 rounded-xl">
-      <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 bg-pink-500 rounded-full animate-pulse" />
+    <div className="p-4 bg-forge-card rounded-xl border border-forge-border">
+      <h3 className="text-forge-text font-semibold mb-4 flex items-center gap-2">
+        <span className="w-2 h-2 bg-forge-orange rounded-full animate-pulse" />
         Community Heatmap
       </h3>
       
@@ -85,14 +85,14 @@ export default function SubmoltHeatmap({ submolts }: SubmoltHeatmapProps) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-4 mt-6 text-xs text-gray-400">
+      <div className="flex items-center justify-center gap-4 mt-6 text-xs text-forge-muted">
         <span>Low activity</span>
         <div className="flex gap-1">
-          <div className="w-4 h-4 rounded bg-purple-900/50" />
-          <div className="w-4 h-4 rounded bg-purple-700/60" />
-          <div className="w-4 h-4 rounded bg-purple-600/70" />
-          <div className="w-4 h-4 rounded bg-pink-600/80" />
-          <div className="w-4 h-4 rounded bg-pink-500/90" />
+          <div className="w-4 h-4 rounded bg-amber-900/40" />
+          <div className="w-4 h-4 rounded bg-amber-700/50" />
+          <div className="w-4 h-4 rounded bg-orange-600/60" />
+          <div className="w-4 h-4 rounded bg-orange-500/70" />
+          <div className="w-4 h-4 rounded bg-yellow-500/80" />
         </div>
         <span>High activity</span>
       </div>

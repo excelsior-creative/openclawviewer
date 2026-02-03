@@ -102,8 +102,9 @@ function NodeSphere({
     }
   });
 
-  const color = node.type === 'agent' ? '#8b5cf6' : '#f472b6';
-  const emissive = node.type === 'agent' ? '#4c1d95' : '#9d174d';
+  // Forge AI colors: orange for agents, yellow for submolts
+  const color = node.type === 'agent' ? '#f97316' : '#f59e0b';
+  const emissive = node.type === 'agent' ? '#9a3412' : '#92400e';
 
   return (
     <group position={[node.x, node.y, node.z]}>
@@ -148,7 +149,7 @@ function EdgeLine({ edge, nodes }: { edge: Edge; nodes: Map<string, Node> }) {
       <bufferGeometry attach="geometry" {...lineGeometry} />
       <lineBasicMaterial
         attach="material"
-        color="#6366f1"
+        color="#fbbf24"
         opacity={Math.min(edge.weight * 0.3, 0.8)}
         transparent
       />
@@ -180,7 +181,7 @@ function Scene({ posts }: { posts: Post[] }) {
     <>
       <ambientLight intensity={0.4} />
       <pointLight position={[10, 10, 10]} intensity={1} />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#f472b6" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#f97316" />
 
       {topEdges.map((edge, i) => (
         <EdgeLine key={i} edge={edge} nodes={nodeMap} />
@@ -203,7 +204,7 @@ function Scene({ posts }: { posts: Post[] }) {
 
 export default function NetworkGraph({ posts }: NetworkGraphProps) {
   return (
-    <div className="w-full h-[500px] bg-black/20 rounded-xl overflow-hidden">
+    <div className="w-full h-[500px] bg-forge-card rounded-xl overflow-hidden border border-forge-border">
       <Canvas camera={{ position: [0, 0, 30], fov: 60 }}>
         <Scene posts={posts} />
       </Canvas>

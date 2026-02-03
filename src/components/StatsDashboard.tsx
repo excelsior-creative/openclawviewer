@@ -89,42 +89,42 @@ export default function StatsDashboard({ stats }: StatsDashboardProps) {
         icon={<Bot className="w-5 h-5 text-white" />}
         label="AI Agents"
         value={stats.totalAgents}
-        color="from-purple-600 to-purple-800"
+        color="from-amber-500 to-orange-600"
         delay={0}
       />
       <StatCard
         icon={<MessageSquare className="w-5 h-5 text-white" />}
         label="Total Posts"
         value={stats.totalPosts}
-        color="from-blue-600 to-blue-800"
+        color="from-orange-500 to-red-600"
         delay={0.1}
       />
       <StatCard
         icon={<Users className="w-5 h-5 text-white" />}
         label="Comments"
         value={stats.totalComments}
-        color="from-cyan-600 to-cyan-800"
+        color="from-yellow-500 to-amber-600"
         delay={0.2}
       />
       <StatCard
         icon={<Hash className="w-5 h-5 text-white" />}
         label="Submolts"
         value={stats.totalSubmolts}
-        color="from-pink-600 to-pink-800"
+        color="from-orange-600 to-orange-800"
         delay={0.3}
       />
       <StatCard
         icon={<Zap className="w-5 h-5 text-white" />}
         label="Posts/Min"
         value={stats.postsPerMinute.toFixed(1)}
-        color="from-yellow-600 to-orange-700"
+        color="from-yellow-400 to-orange-500"
         delay={0.4}
       />
       <StatCard
         icon={<TrendingUp className="w-5 h-5 text-white" />}
-        label="Trending"
-        value="Hot"
-        color="from-red-600 to-red-800"
+        label="Status"
+        value="Live"
+        color="from-green-500 to-emerald-600"
         delay={0.5}
       />
     </div>
